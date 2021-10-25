@@ -1,0 +1,42 @@
+name: Build for target platforms
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  buildForTargetPlatforms:
+    name: Build ${{ matrix.application }} for ${{ matrix.targetPlatform }}
+    runs-on: macos-11
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - unity-ci
+        unityVersion:
+          - 2022.1.0a12
+        application:
+          - Launcher
+          - App
+        targetPlatform:
+          - StandaloneOSX
+          - StandaloneWindows64
+    steps:
+      - name: Checkout repository
+      - uses: actions/checkout@v2
+
+      - uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+          customParameters: '-myParameter myValue -myBoolean -ThirdParameter andItsValue'
+          buildMethod: Editor.Builder.${{ matrix.application }}Builder.PerformBuild
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: build
