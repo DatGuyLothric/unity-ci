@@ -1,21 +1,29 @@
-name: Acquire activation file
+name: Activation
 
 on:
   workflow_dispatch: {}
 
 jobs:
-  activation:
-    name: Request manual activation file 🔑
-    runs-on: ubuntu-latest
+  requestActivationFile:
+    name: Request activation file
+    runs-on: macos-11
     steps:
-      - name: Request manual activation file
-        id: getManualLicenseFile
-        uses: game-ci/unity-request-activation-file@v2
-        with:
-          unityVersion: 2022.1.0a12
+      - name: Download Unity
+        run: sudo curl -o Unity.pkg 'http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorInstaller/Unity.pkg'
+        env:
+          # VERSION: 2022.1.0a12
+          CHANGESET: 816252c3efbb
+    
+      - name: Install Unity
+        run: sudo installer -dumplog -package Unity.pkg -target /Applications
+        
+      - name: Generate activation file
+        run: ${{ EDITOR_LOCATION }} -batchmode -createManualActivationFile -logfile
+        env:
+          EDITOR_LOCATION: /Applications/Unity/Unity.app/Contents/MacOS/Unity
         
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          name: Unity_v2022.1.0a12.alf
+          path: ./Unity_v2022.1.0a12.alf
