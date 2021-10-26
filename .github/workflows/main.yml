@@ -11,7 +11,10 @@ jobs:
     runs-on: macos-11
     steps:
       - name: Install Unity
-        run: sudo installer -dumplog -package http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorInstaller/Unity.pkg
+        run: sudo installer -dumplog -package http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorInstaller/Unity.pkg -target /
         env:
           # 2022.1.0a12
           CHANGESET: 816252c3efbb
+          
+      - name: LS
+        run: ls
