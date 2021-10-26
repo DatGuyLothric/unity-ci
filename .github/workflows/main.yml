@@ -11,4 +11,7 @@ jobs:
     runs-on: macos-11
     steps:
       - name: Install Unity
-        run: sudo installer -dumplog -package Unity.pkg -target /
+        run: sudo installer -dumplog -package Unity.pkg -target http://download.unity3d.com/download_unity/${{ CHANGESET }}/MacEditorInstaller/Unity.pkg
+        env:
+          # 2022.1.0a12
+          CHANGESET: 816252c3efbb
