@@ -13,8 +13,8 @@ jobs:
       - name: Download Unity
         run: |
           sudo curl -o Unity.pkg 'http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorInstaller/Unity.pkg'
-          && sudo curl -o Unity-Mac.pkg 'http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorTargetInstaller/UnitySetup-Mac-Support-for-Editor-${{ env.VERSION }}.pkg'
-          && sudo curl -o Unity-Windows.pkg 'http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-${{ env.VERSION }}.pkg'
+          sudo curl -o Unity-Mac.pkg 'http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorTargetInstaller/UnitySetup-Mac-Support-for-Editor-${{ env.VERSION }}.pkg'
+          sudo curl -o Unity-Windows.pkg 'http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-${{ env.VERSION }}.pkg'
         env:
           VERSION: 2022.1.0a12
           CHANGESET: 816252c3efbb
@@ -22,8 +22,8 @@ jobs:
       - name: Install Unity
         run: |
           sudo installer -dumplog -package Unity.pkg -target /Applications
-          && sudo installer -dumplog -package Unity-Mac.pkg -target /Applications
-          && sudo installer -dumplog -package Unity-Windows.pkg -target /Applications
+          sudo installer -dumplog -package Unity-Mac.pkg -target /Applications
+          sudo installer -dumplog -package Unity-Windows.pkg -target /Applications
           
       - name: Check installation
         run: sudo cd /Applications && sudo ls
