@@ -18,7 +18,7 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
         
       - name: Generate activation file
-        run: ${{ EDITOR_LOCATION }} -batchmode -createManualActivationFile -logfile
+        run: ${{ env.EDITOR_LOCATION }} -batchmode -createManualActivationFile -logfile
         env:
           EDITOR_LOCATION: /Applications/Unity/Unity.app/Contents/MacOS/Unity
         
