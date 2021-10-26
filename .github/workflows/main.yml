@@ -20,4 +20,4 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
       - name: Check installation
-        run: sudo cd /Applications && sudo ls
+        run: ls && cd / && ls && cd /Applications && ls
