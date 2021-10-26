@@ -6,7 +6,7 @@ on:
 jobs:
   activation:
     name: Request manual activation file 🔑
-    runs-on: macos-11
+    runs-on: ubuntu-latest
     steps:
       - name: Request manual activation file
         id: getManualLicenseFile
