@@ -18,7 +18,7 @@ jobs:
           key: unity-installer
     
       - name: Download Unity
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-unity-installer.outputs.cache-hit != 'true'
         run: sudo curl -o Unity.pkg 'http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorInstaller/Unity.pkg'
         env:
           # VERSION: 2022.1.0a12
@@ -28,4 +28,4 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
       - name: Check installation
-        run: /Applications/Unity/Unity.app -batchmode -createManualActivationFile -logfile
+        run: /Applications/Unity/Unity.app/Contents/MacOS/Unity -batchmode -createManualActivationFile -logfile
