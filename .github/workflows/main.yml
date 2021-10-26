@@ -10,7 +10,15 @@ jobs:
     name: Build
     runs-on: macos-11
     steps:
+      - name: Cache Unity installer
+        id: cache-unity-installer
+        uses: actions/cache@v2
+        with:
+          path: Unity.pkg
+          key: unity-installer
+    
       - name: Download Unity
+        if: steps.cache.outputs.cache-hit != 'true'
         run: sudo curl -o Unity.pkg 'http://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorInstaller/Unity.pkg'
         env:
           # VERSION: 2022.1.0a12
@@ -20,4 +28,4 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
       - name: Check installation
-        run: cd /Applications/Unity && ls
+        run: cd /Applications/Unity/Unity.app && ls
