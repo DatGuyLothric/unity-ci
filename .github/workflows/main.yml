@@ -11,4 +11,4 @@ jobs:
     runs-on: macos-11
     steps:
       - name: Install Unity
-      - run: sudo installer [-dumplog] -package Unity.pkg -target /
+        run: sudo installer [-dumplog] -package Unity.pkg -target /
