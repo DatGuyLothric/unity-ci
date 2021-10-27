@@ -28,4 +28,4 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
       - name: Check installation
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -batchmode -createManualActivationFile -logfile
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -createManualActivationFile -logfile
