@@ -26,9 +26,10 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
       - name: Generate activation file
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -nographics -batchmode -createManualActivationFile -logfile -username <> -password <>
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -nographics -batchmode -createManualActivationFile -logfile
         
       - name: Expose as artifact
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: Unity_v2022.1.0a12.alf
