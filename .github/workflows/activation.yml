@@ -25,8 +25,8 @@ jobs:
       - name: Install Unity
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
-      - name: Check installation
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -batchmode -createManualActivationFile -logfile
+      - name: Generate activation file
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -nographics -batchmode -createManualActivationFile -logfile -username <> -password <>
         
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
