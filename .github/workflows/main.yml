@@ -28,10 +28,7 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
       - name: Activate Unity
-        run: |
-          sudo echo "${{ secrets.ACTIVATION }}" > activation.ulf
-          sudo cat activation.ulf
-          sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -manualLicenseFile activation.ulf
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -manualLicenseFile ./.github/Unity_v2022.x.ulf
 
       - name: Checkout repo
         uses: actions/checkout@v2
