@@ -36,7 +36,7 @@ jobs:
         run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes || exit 0
 
       - name: Build test (windows launcher)
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.LauncherBuilder.PerformBuild -buildWindows64Player ./builds/windows/launcher -silent-crashes || exit 0
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.LauncherBuilder.PerformBuild -silent-crashes || exit 0
 
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
