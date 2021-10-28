@@ -107,4 +107,4 @@ function sleep(milliSeconds) {
     });
 }
 
-await start();
+(async () => await start())();
