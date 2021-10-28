@@ -36,21 +36,9 @@ jobs:
     
       - name: Install Unity
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
-
-      - name: Generate activation file
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -quit -nographics -batchmode -createManualActivationFile -logfile -silent-crashes || exit 0
-
-      - name: Install tool deps
-        run: |
-          cd ./project/login_tool
-          npm i
-          cd ../../
-          
-      - name: Get ulf file
-        run: node ./project/login_tool/index.js ./Unity_v2022.1.0a12.alf ${{ secrets.LOGIN }} ${{ secrets.PASSWORD }}
           
       - name: Activate Unity
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -manualLicenseFile ./Unity_v2022.x.ulf
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }}
 
       - name: Build test (windows launcher)
         run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.LauncherBuilder.PerformBuild -buildWindows64Player ./builds/windows/launcher
@@ -60,3 +48,6 @@ jobs:
         with:
           name: launcher_windows
           path: ./builds/windows/launcher
+
+      - name: Revoke license
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -returnlicense -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}'
