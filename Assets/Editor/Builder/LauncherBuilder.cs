@@ -8,10 +8,10 @@ namespace Editor.Builder
         {
             var scenes = new []
             {
-                "Assets/Scenes/MyScene.unity"
+                "Assets/Scenes/Launcher.unity"
             };
             
-            BuildPipeline.BuildPlayer(scenes, "/Users/runner/work/unity-ci/unity-ci/builds/osx/Launcher.app", BuildTarget.StandaloneOSX, BuildOptions.None);
+            BuildPipeline.BuildPlayer(scenes, "/Users/runner/work/unity-ci/unity-ci/builds/osx/Launcher", BuildTarget.StandaloneOSX, BuildOptions.None);
         }
     }
 }
