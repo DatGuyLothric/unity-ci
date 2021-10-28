@@ -11,7 +11,7 @@ namespace Editor.Builder
                 "Assets/Scenes/MyScene.unity"
             };
             
-            BuildPipeline.BuildPlayer(scenes, "/Users/runner/work/unity-ci/unity-ci/builds/osx/launcher", BuildTarget.StandaloneOSX, BuildOptions.None);
+            BuildPipeline.BuildPlayer(scenes, "/Users/runner/work/unity-ci/unity-ci/builds/osx/Launcher.app", BuildTarget.StandaloneOSX, BuildOptions.None);
         }
     }
 }
