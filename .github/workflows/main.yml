@@ -30,6 +30,7 @@ jobs:
       - name: Activate Unity
         run: |
           sudo echo "${{ secrets.ACTIVATION }}" > activation.ulf
+          sudo cat activation.ulf
           sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -manualLicenseFile activation.ulf
 
       - name: Checkout repo
