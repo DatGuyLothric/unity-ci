@@ -41,10 +41,10 @@ async function login() {
         await page.waitForSelector('#new_conversations_create_session_form #conversations_create_session_form_password')
     ]);
     
-    const email = `${process.argv[2]}`;
+    const email = `${process.argv[3]}`;
     await page.type('input[type=email]', email);
 
-    const password = `${process.argv[3]}`;
+    const password = `${process.argv[4]}`;
     await page.type('input[type=password]', password);
     await page.click('input[name="commit"]');
 
@@ -57,7 +57,7 @@ async function license() {
 
     const input = await page.$(licenseFile);
     
-    const alfPath = `${process.argv[4]}`;
+    const alfPath = `${process.argv[2]}`;
     await input.uploadFile(alfPath);
     
     await page.click('input[name="commit"]');
