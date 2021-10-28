@@ -35,14 +35,14 @@ jobs:
       - name: Activate Unity
         run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes || exit 0
 
-      - name: Build test (windows launcher)
+      - name: Build test (osx launcher)
         run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.LauncherBuilder.PerformBuild -silent-crashes || exit 0
 
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
         with:
           name: launcher_windows
-          path: ./builds/windows/launcher
+          path: ./builds/osx/launcher
 
       - name: Revoke license
         if: always()
