@@ -33,7 +33,7 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
       - name: Activate Unity
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes || exit 0
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes || exit 0
 
       - name: Build test (osx launcher)
         run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.LauncherBuilder.PerformBuild -silent-crashes || exit 0
