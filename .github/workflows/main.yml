@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: launcher_windows
-          path: ./builds/osx/launcher
+          path: ./
 
       - name: Revoke license
         if: always()
