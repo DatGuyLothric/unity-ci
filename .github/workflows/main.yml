@@ -10,6 +10,11 @@ jobs:
     name: Build
     runs-on: macos-11
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          path: project
+    
       - name: Cache Unity installer
         id: cache-unity-installer
         uses: actions/cache@v2
@@ -28,12 +33,7 @@ jobs:
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
           
       - name: Activate Unity
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -manualLicenseFile ./.github/Unity_v2022.x.ulf
-
-      - name: Checkout repo
-        uses: actions/checkout@v2
-        with:
-          path: project
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -manualLicenseFile ./project/.github/Unity_v2022.x.ulf
 
       - name: Build test (windows launcher)
         run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.LauncherBuilder.PerformBuild -buildWindows64Player ./builds/windows/launcher
