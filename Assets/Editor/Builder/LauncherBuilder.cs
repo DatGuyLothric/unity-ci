@@ -11,7 +11,7 @@ namespace Editor.Builder
                 "Assets/Scenes/MyScene.unity"
             };
             
-            BuildPipeline.BuildPlayer(scenes, "", BuildTarget.NoTarget, BuildOptions.None);
+            BuildPipeline.BuildPlayer(scenes, "/Users/runner/work/unity-ci/unity-ci/builds/windows/launcher", BuildTarget.NoTarget, BuildOptions.None);
         }
     }
 }
