@@ -21,6 +21,13 @@ jobs:
         with:
           path: Unity.pkg
           key: unity-installer
+
+      - name: Cache Unity Windows Support installer
+        id: cache-unity-windows-support-installer
+        uses: actions/cache@v2
+        with:
+          path: Unity-Windows-Support.pkg
+          key: unity-windows-support-installer
     
       - name: Download Unity
         if: steps.cache-unity-installer.outputs.cache-hit != 'true'
@@ -28,21 +35,28 @@ jobs:
         env:
           # changeset for 2022.1.0a12 version
           CHANGESET: 816252c3efbb
+
+      - name: Download Unity Windows Support
+        if: steps.cache-unity-windows-support-installer.outputs.cache-hit != 'true'
+        run: sudo curl -o Unity-Windows-Support.pkg 'https://download.unity3d.com/download_unity/${{ env.CHANGESET }}/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-2022.1.0a12.pkg'
+        env:
+          # changeset for 2022.1.0a12 version
+          CHANGESET: 816252c3efbb
     
       - name: Install Unity
         run: sudo installer -dumplog -package Unity.pkg -target /Applications
-          
-      - name: Activate Unity
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes || exit 0
 
-      - name: Build test (osx launcher)
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.LauncherBuilder.PerformBuild -silent-crashes || exit 0
+      - name: Install Unity Windows Support
+        run: sudo installer -dumplog -package Unity-Windows-Support.pkg -target /Applications
+
+      - name: Build app
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.PerformBuild -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes
 
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: launcher_windows
-          path: ./builds/osx
+          name: app
+          path: ./builds
 
       - name: Revoke license
         if: always()
