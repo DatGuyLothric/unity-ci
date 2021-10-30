@@ -50,7 +50,7 @@ jobs:
         run: sudo installer -dumplog -package Unity-Windows-Support.pkg -target /Applications
 
       - name: Build app
-        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.Builder.PerformBuild -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.BuildHelper.PerformBuild -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes
 
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
