@@ -48,6 +48,9 @@ jobs:
 
       - name: Install Unity Windows Support
         run: sudo installer -dumplog -package Unity-Windows-Support.pkg -target /Applications
+        
+      - name: Check
+        run: ls /Applications/Unity && ls /Applications/Unity/Unity.app/Contents && ls /Applications/Unity/Unity.app/Contents/MacOS
 
       - name: Build app
         run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.BuildHelper.PerformBuild -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes
