@@ -39,12 +39,12 @@ namespace Editor
 
         private static void BuildLauncherWindows()
         {
-            BuildPipeline.BuildPlayer(ScenesForLauncher, $"{BasePath}/{WindowsPath}/{Launcher.ToLower()}/{Launcher}", BuildTarget.StandaloneWindows64, BuildOptions.None);
+            BuildPipeline.BuildPlayer(ScenesForLauncher, $"{BasePath}/{WindowsPath}/{Launcher.ToLower()}/{Launcher}.exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
         }
 
         private static void BuildAppWindows()
         {
-            BuildPipeline.BuildPlayer(ScenesForApp, $"{BasePath}/{WindowsPath}/{App.ToLower()}/{App}", BuildTarget.StandaloneWindows64, BuildOptions.None);
+            BuildPipeline.BuildPlayer(ScenesForApp, $"{BasePath}/{WindowsPath}/{App.ToLower()}/{App}.exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
         }
     }
 }
