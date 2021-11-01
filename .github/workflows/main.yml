@@ -16,7 +16,7 @@ jobs:
           path: project
     
       - name: Cache Unity installer
-        uses: DarGuyLothric/unity-build@master
+        uses: atGuyLothric/unity-build@master
         with:
           target_platforms: 'macOS|Windows'
           changeset: '816252c3efbb'
