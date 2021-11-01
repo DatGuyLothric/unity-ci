@@ -15,17 +15,19 @@ jobs:
         with:
           path: project
     
-      - name: Cache Unity installer
-        uses: DatGuyLothric/unity-build@master
+      - name: Install Unity
+        uses: DatGuyLothric/unity-install@master
         with:
-          target_platforms: 'macOS|Windows'
+          target_platforms: 'Windows'
           changeset: '816252c3efbb'
           version: '2022.1.0a12'
-          serial: '${{ secrets.ACTIVATION }}'
-          username: '${{ secrets.LOGIN }}'
-          password: '${{ secrets.PASSWORD }}'
-          project_path: './project'
-          build_script: 'Editor.BuildHelper.PerformBuild'
+          
+      - name: Build app
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.BuildHelper.PerformBuild -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes
+        
+      - name: Revoke license
+        if: always()
+        run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -returnlicense -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}'
 
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
