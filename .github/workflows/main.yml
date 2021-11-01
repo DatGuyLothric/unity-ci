@@ -16,7 +16,7 @@ jobs:
           path: project
           
       - name: dsf
-        run: ls /
+        run: ls ~/
     
       - name: Install Unity
         uses: DatGuyLothric/unity-install@master
