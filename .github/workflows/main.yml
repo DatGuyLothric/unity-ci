@@ -21,6 +21,7 @@ jobs:
           target_platforms: 'Windows'
           changeset: '816252c3efbb'
           version: '2022.1.0a12'
+          download_folder: '/Users/runner/work/unity-ci/unity-ci/downloads'
           
       - name: Build app
         run: sudo /Applications/Unity/Unity.app/Contents/MacOS/Unity -nographics -quit -batchmode -logfile -projectPath ./project -executeMethod Editor.BuildHelper.PerformBuild -username '${{ secrets.LOGIN }}' -password '${{ secrets.PASSWORD }}' -serial ${{ secrets.ACTIVATION }} -silent-crashes
